@@ -23,12 +23,9 @@ export default new Vuex.Store({
       },
       actions: {
         getUsers({ commit }) {
-          // console.log('lllll', Http.get('/users'));
           return Http.get('/users').then(res => {
-            console.log(res, 'llll');
             const { data } = res || {};
 
-            commit('setUsers', data);
             return Promise.resolve(data);
           });
         },
