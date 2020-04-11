@@ -39,9 +39,7 @@ export default new Vuex.Store({
         async getPostsByUserId({ commit }, userId) {
           return Http.get(`/posts?userId=${userId}`).then(res => {
             const { data } = res;
-            console.log(data, 'lklklkl');
             commit('setPosts', data);
-            // return Promise.resolve(data);
           });
         }
       }
