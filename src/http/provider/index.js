@@ -4,15 +4,10 @@ import { config } from '../config';
 class Http {
   constructor() {
     this.axios = axios.create({
-      ...config,
+      ...config
     });
   }
 
-  setConfig() {
-    this.axios = axios.create({
-      ...config,
-    });
-  }
   async get(path) {
     return await this.axios.get(path);
   }
