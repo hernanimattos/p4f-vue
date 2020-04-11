@@ -20,9 +20,6 @@ export default {
   computed: {
     ...mapState(['posts'])
   },
-  methods: {
-    ...mapActions(['getPostsByUserId'])
-  },
   components: {
     PostCard
   }
