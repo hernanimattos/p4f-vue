@@ -32,6 +32,7 @@ export default {
 }
 .user-card:hover {
   transform: scale(1.05);
-  background-color: #ccc;
+  background-color: rgb(26, 117, 255);
+  color: #fff;
 }
 </style>

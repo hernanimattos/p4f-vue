@@ -19,8 +19,15 @@ export default {
 <style>
 .main-container {
   display: grid;
-  grid-column-gap: 1.5rem;
-  grid-template-columns: 1fr 3fr;
-  /* padding: 1rem; */
+}
+
+@media screen and (min-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+header {
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
 </style>

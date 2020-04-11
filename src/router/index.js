@@ -18,6 +18,14 @@ const routes = [
     name: 'Posts',
     component: Home,
     meta: {
+      comonent: 'PostsContainers'
+    }
+  },
+  {
+    path: '/fotos',
+    name: 'Fotos',
+    component: Home,
+    meta: {
       component: 'FotosContainer'
     }
   }

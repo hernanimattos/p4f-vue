@@ -6,7 +6,7 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -15,8 +15,11 @@
   list-style: none;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none;
+}
 #app {
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
+  font-family: Raleway, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

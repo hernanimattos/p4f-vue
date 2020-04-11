@@ -1,14 +1,22 @@
 <template>
   <div>
-    logo
-    <img src="" alt="" />
+    <router-link to="/">
+      <img
+        src="https://apostasesportivas24.com/images/apostasesportivas24/logo_p4f.jpg"
+        alt="p4f"
+      />
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'logo',
+  name: 'logo'
 };
 </script>
 
-<style></style>
+<style>
+img {
+  width: 200px;
+}
+</style>

@@ -17,10 +17,10 @@
     </template>
     <template slot="main-content">
       <section>
-        <menu>
+        <nav class="navigation">
           <ul>
             <li>
-              <router-link to="posts">Posts</router-link>
+              <router-link to="/posts">Posts</router-link>
             </li>
             <li>
               <router-link to="fotos"> fotos</router-link>
@@ -33,7 +33,7 @@
             :email="user.email"
           />
           <component :is="comp" />
-        </menu>
+        </nav>
       </section>
     </template>
   </Layout>
@@ -88,6 +88,34 @@ export default {
 </script>
 <style>
 .home {
+  padding: 1rem;
+}
+
+aside {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  word-break: break-word;
+}
+
+@media screen and (min-width: 768px) {
+  aside {
+    padding-right: 1rem;
+  }
+}
+.navigation ul {
+  background-color: #f09500;
+  display: flex;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.navigation a {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.navigation ul li {
   padding: 1rem;
 }
 </style>
