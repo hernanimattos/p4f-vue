@@ -11,7 +11,7 @@
           :title="user.name"
           :company="user.company.name"
           :email="user.email"
-          @click="getUser(user)"
+          @click="getDataByUserId(user)"
         />
       </aside>
     </template>
@@ -67,12 +67,32 @@ export default {
     ...mapState(['users', 'user'])
   },
   methods: {
-    ...mapActions(['getUsers', 'getUser'])
+    ...mapActions(['getUsers', 'getUser', 'getPostsByUserId']),
+
+    getDataByUserId(user) {
+      const { id } = user;
+
+      this.getUser(user);
+      this.manageCallsByRoute(id);
+    },
+    manageCallsByRoute(id) {
+      const { name } = this.$route;
+      const routeCall = {
+        Posts: id => this.getPostsByUserId(id)
+      };
+
+      return routeCall[name](id);
+    }
   },
   created() {
     if (this.users.length === 0) {
       this.getUsers().then(res => {
+        const { id } = res[0];
         this.getUser(res[0]);
+        const { name } = this.$route;
+        if (name === 'Posts') {
+          this.getPostsByUserId(id);
+        }
       });
     }
   },

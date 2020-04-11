@@ -10,7 +10,8 @@ export default new Vuex.Store({
       namespaced: true,
       state: {
         users: [],
-        user: {}
+        user: {},
+        posts: []
       },
       mutations: {
         setUsers(state, payload) {
@@ -18,22 +19,32 @@ export default new Vuex.Store({
         },
         setUser(state, payload) {
           state.user = payload;
+        },
+        setPosts(state, payload) {
+          state.posts = payload;
         }
       },
       actions: {
-        getUsers({ commit }) {
+        async getUsers({ commit }) {
           return Http.get('/users').then(res => {
             const { data } = res || {};
-
+            commit('setUsers', data);
             return Promise.resolve(data);
           });
         },
         getUser({ commit, state }, user) {
           if (state.user.name === user.name) return;
           commit('setUser', user);
+        },
+        async getPostsByUserId({ commit }, userId) {
+          return Http.get(`/posts?userId=${userId}`).then(res => {
+            const { data } = res;
+            console.log(data, 'lklklkl');
+            commit('setPosts', data);
+            // return Promise.resolve(data);
+          });
         }
-      },
-      getPostsByUserId({ commit }, userId) {}
+      }
     }
   }
 });

@@ -1,8 +1,7 @@
 <template>
-  <div class="card" @click="click">
+  <div class="post-card" @click="click">
     <h2>{{ title }}</h2>
-    <p>{{ email }}</p>
-    <p>{{ company }}</p>
+    <p>{{ body }}</p>
   </div>
 </template>
 
@@ -11,14 +10,13 @@ export default {
   name: 'post-card',
   props: {
     title: String,
-    email: String,
-    company: String,
+    body: String
   },
   methods: {
     click() {
       this.$emit('click');
-    },
-  },
+    }
+  }
 };
 </script>
 
