@@ -29,6 +29,7 @@ export default {
   cursor: pointer;
   margin-bottom: 0.5rem;
   transition: all 0.2s ease-in-out;
+  background-color: #fff;
 }
 .user-card:hover {
   transform: scale(1.05);

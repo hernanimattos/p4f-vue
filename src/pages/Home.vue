@@ -16,8 +16,8 @@
       </aside>
     </template>
     <template slot="main-content">
-      <section>
-        <nav class="navigation">
+      <section class="navigation-container">
+        <nav class="navigation-content">
           <ul>
             <li>
               <router-link to="/posts">Posts</router-link>
@@ -96,26 +96,39 @@ aside {
   max-width: 100%;
   flex-direction: column;
   word-break: break-word;
+  background-color: rgb(26, 117, 255);
 }
 
-@media screen and (min-width: 768px) {
-  aside {
-    padding-right: 1rem;
-  }
+.navigation-container {
+  padding-left: 1rem;
 }
-.navigation ul {
+
+.navigation-content ul {
   background-color: #f09500;
   display: flex;
   margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.navigation a {
+.navigation-content a {
   color: #fff;
   text-transform: uppercase;
 }
 
-.navigation ul li {
+.navigation-content ul li {
   padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation-container {
+    margin-top: 2rem;
+    padding-left: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  aside {
+    padding: 1rem;
+  }
 }
 </style>
