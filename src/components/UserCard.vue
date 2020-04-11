@@ -27,7 +27,7 @@ export default {
   box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
 .user-card:hover {

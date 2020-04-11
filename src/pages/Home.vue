@@ -86,3 +86,8 @@ export default {
   }
 };
 </script>
+<style>
+.home {
+  padding: 1rem;
+}
+</style>

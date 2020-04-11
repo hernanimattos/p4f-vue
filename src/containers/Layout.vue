@@ -21,6 +21,6 @@ export default {
   display: grid;
   grid-column-gap: 1.5rem;
   grid-template-columns: 1fr 3fr;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 </style>
