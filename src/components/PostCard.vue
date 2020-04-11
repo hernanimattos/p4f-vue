@@ -20,4 +20,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.post-card {
+  padding-bottom: 1rem;
+}
+</style>
