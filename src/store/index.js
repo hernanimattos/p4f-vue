@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Http from '../http/provider';
-// import Http from '../http/provider';
 
 Vue.use(Vuex);
 
@@ -31,10 +30,10 @@ export default new Vuex.Store({
         },
         getUser({ commit, state }, user) {
           if (state.user.name === user.name) return;
-          console.log(user);
           commit('setUser', user);
         }
-      }
+      },
+      getPostsByUserId({ commit }, userId) {}
     }
   }
 });
