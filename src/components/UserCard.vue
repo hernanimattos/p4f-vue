@@ -12,13 +12,13 @@ export default {
   props: {
     title: String,
     email: String,
-    company: String,
+    company: String
   },
   methods: {
     click() {
       this.$emit('click');
-    },
-  },
+    }
+  }
 };
 </script>
 
