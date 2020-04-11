@@ -1,5 +1,5 @@
 <template>
-  <HomeBase class="home">
+  <Layout class="home">
     <template slot="header">
       <Logo />
     </template>
@@ -36,14 +36,14 @@
         </menu>
       </section>
     </template>
-  </HomeBase>
+  </Layout>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('main');
 
-import HomeBase from '@/containers/HomeBase';
+import Layout from '@/containers/Layout';
 import Logo from '@/components/Logo';
 import UserCard from '@/components/UserCard';
 import PostsContainer from '@/containers/PostsContainer';
@@ -78,7 +78,7 @@ export default {
   },
 
   components: {
-    HomeBase,
+    Layout,
     Logo,
     UserCard,
     PostsContainer,
