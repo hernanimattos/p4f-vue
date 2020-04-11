@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="click">
+  <div class="user-card" @click="click">
     <h2>{{ title }}</h2>
     <p>{{ email }}</p>
     <p>{{ company }}</p>
@@ -22,4 +22,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.user-card {
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  cursor: pointer;
+  margin-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.user-card:hover {
+  transform: scale(1.05);
+  background-color: #ccc;
+}
+</style>
