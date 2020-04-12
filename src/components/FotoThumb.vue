@@ -40,12 +40,6 @@ export default {
     click() {
       this.$emit('click', this.thumbActive);
     }
-  },
-  mounted() {
-    console.log(this.thumbWidth);
-    if (this.humbWidth) {
-      this.imgSize = this.thumbWidth;
-    }
   }
 };
 </script>
@@ -53,5 +47,6 @@ export default {
 <style>
 .foto-item {
   transition: ease;
+  padding: 0.5rem;
 }
 </style>

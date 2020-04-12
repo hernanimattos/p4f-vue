@@ -142,10 +142,6 @@ export default {
   overflow: hidden;
 }
 
-/* .navigation-content {
-  overflow: hidden;
-} */
-
 .navigation-content ul {
   background-color: #f09500;
   display: flex;
@@ -156,10 +152,11 @@ export default {
 .navigation-content a {
   color: #fff;
   text-transform: uppercase;
-}
-
-.navigation-content ul li {
+  display: block;
   padding: 1rem;
+}
+.router-link-exact-active {
+  background-color: rebeccapurple;
 }
 
 @media screen and (max-width: 768px) {
