@@ -1,11 +1,21 @@
 <template>
   <div class="fotos-container">
+    <div class="foto-container__active">
+      <foto-thumb :src="imgSrcActive" :slide-width="slideWidth" />
+    </div>
     <div class="thumb-control">
       <span id="thumb-control__left" @click="leftControl">left</span>
       <span id="thumb-control__right" @click="rightControl">Right</span>
     </div>
     <div class="fotos-container__thumb" v-if="imgs.length > 0">
-      <foto-thumb v-for="img in imgs" :key="img.id" :src="img.thumbnailUrl" />
+      <foto-thumb
+        v-for="img in imgs"
+        :key="img.id"
+        :src="img.thumbnailUrl"
+        :thumb-active="img.url"
+        @click="setActiveCheck"
+        :thumb-width="thumbWidth"
+      />
     </div>
   </div>
 </template>
@@ -19,32 +29,34 @@ export default {
   name: 'fotos-container',
   data() {
     return {
+      imgSrcActive: '',
+      slideWidth: 0,
       thumbIndex: 0,
       thumbContainer: '',
       fotoItem: '',
-      thumbWidth: '',
+      thumbWidth: 0,
       move: ''
     };
   },
   computed: {
     ...mapState(['imgs'])
   },
-  components: {
-    FotoThumb
-  },
-  methods: {
-    constrolWithFotoItem() {
-      // this.thumbContainer = document.getElementsByClassName('fotos-container');
-      this.thumbContainer = document.getElementsByClassName(
-        'fotos-container__thumb'
-      );
-      this.thumbWidth = this.thumbContainer[0].clientWidth / 4;
-      setTimeout(() => {
-        this.fotoItem = document.getElementsByClassName('foto-item');
 
-        Array.from(this.fotoItem).map(ele => {
-          ele.firstElementChild.setAttribute('width', `${this.thumbWidth}px`);
-        });
+  methods: {
+    setActiveCheck(value) {
+      this.imgSrcActive = value;
+      this.slideWidth = 600;
+    },
+    constrolWithFotoItem() {
+      setTimeout(() => {
+        this.thumbContainerSize = document.getElementsByClassName(
+          'fotos-container'
+        );
+        this.thumbContainer = document.getElementsByClassName(
+          'fotos-container__thumb'
+        );
+        this.thumbWidth = this.thumbContainerSize[0].clientWidth / 4;
+        this.fotoItem = document.getElementsByClassName('foto-item');
       }, 100);
     },
     controlActive() {
@@ -76,13 +88,15 @@ export default {
   },
   updated() {
     this.constrolWithFotoItem();
+  },
+  components: {
+    FotoThumb
   }
 };
 </script>
 
 <style>
 .fotos-container {
-  /* max-width: 100%; */
   position: relative;
   overflow: hidden;
 }
