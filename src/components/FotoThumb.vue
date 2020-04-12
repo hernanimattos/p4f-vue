@@ -1,6 +1,6 @@
 <template>
   <figure @click="click" class="foto-item">
-    <img :src="src" alt="" :width="imgSize" />
+    <img :src="src" :alt="title" :width="imgSize" :thumb-active="thumbActive" />
   </figure>
 </template>
 
@@ -22,6 +22,7 @@ export default {
   },
   props: {
     src: String,
+    title: String,
     thumbActive: String,
     width: {
       type: String,
@@ -47,6 +48,6 @@ export default {
 <style>
 .foto-item {
   transition: ease;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
 }
 </style>

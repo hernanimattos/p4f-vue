@@ -13,6 +13,9 @@ export default new Vuex.Store({
         user: {},
         posts: [],
         imgs: [],
+        imgInit: {
+          width: 600
+        },
         loading: false
       },
       mutations: {
@@ -27,6 +30,9 @@ export default new Vuex.Store({
         },
         setImages(state, payload) {
           state.imgs = payload;
+        },
+        setImageInit(state, payload) {
+          state.imgInit = payload;
         },
         setLoading(state, payload) {
           state.loading = payload;
@@ -58,11 +64,17 @@ export default new Vuex.Store({
             commit('setPosts', data);
           });
         },
+        getImageSelected({ commit, state }, data) {
+          commit('setImageInit', data);
+        },
         async getImagesByUserId({ commit }, id) {
           commit('setLoading', true);
 
           return Http.get(`/photos?albumId=${id}`).then(res => {
             const { data } = res;
+            const imgInit = data[0];
+
+            commit('setImageInit', imgInit);
             commit('setLoading', false);
             commit('setImages', data);
           });

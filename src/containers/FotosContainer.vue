@@ -1,7 +1,7 @@
 <template>
   <div class="fotos-container">
     <div class="foto-container__active">
-      <foto-thumb :src="imgSrcActive" :slide-width="slideWidth" />
+      <foto-thumb :src="imgInit.url" :slide-width="imgInit.width" />
     </div>
     <div class="thumb-control">
       <span id="thumb-control__left" @click="leftControl">left</span>
@@ -9,8 +9,10 @@
     </div>
     <div class="fotos-container__thumb" v-if="imgs.length > 0">
       <foto-thumb
+        ref="thumbImg"
         v-for="img in imgs"
         :key="img.id"
+        :title="img.title"
         :src="img.thumbnailUrl"
         :thumb-active="img.url"
         @click="setActiveCheck"
@@ -25,11 +27,11 @@ import { createNamespacedHelpers } from 'vuex';
 import FotoThumb from '../components/FotoThumb';
 
 const { mapState, mapActions } = createNamespacedHelpers('main');
+
 export default {
   name: 'fotos-container',
   data() {
     return {
-      imgSrcActive: '',
       slideWidth: 0,
       thumbIndex: 0,
       thumbContainer: '',
@@ -39,13 +41,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(['imgs'])
+    ...mapState(['imgs', 'imgInit'])
   },
-
   methods: {
+    ...mapActions(['getImageSelected']),
     setActiveCheck(value) {
-      this.imgSrcActive = value;
-      this.slideWidth = 600;
+      this.getImageSelected({ url: value });
     },
     constrolWithFotoItem() {
       setTimeout(() => {
@@ -66,12 +67,19 @@ export default {
     },
     rightControl() {
       this.thumbIndex++;
+
       if (this.thumbIndex > this.fotoItem.length - 4) {
         this.thumbIndex = 0;
       }
 
+      const url = this.fotoItem[
+        this.thumbIndex + 1
+      ].firstElementChild.getAttribute('thumb-active');
+      this.getImageSelected({ url });
+
       this.move = this.thumbWidth * this.thumbIndex;
       this.thumbContainer[0].style.marginLeft = `-${this.move}px`;
+      this.controlActive();
     },
     leftControl() {
       this.thumbIndex--;
@@ -81,6 +89,10 @@ export default {
         this.thumbIndex = 0;
         this.move = 0;
       }
+      const url = this.fotoItem[
+        this.thumbIndex + 1
+      ].firstElementChild.getAttribute('thumb-active');
+      this.getImageSelected({ url });
 
       this.thumbContainer[0].style.marginLeft = `-${this.move}px`;
       this.controlActive();

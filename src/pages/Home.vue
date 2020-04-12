@@ -67,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['users', 'user', 'loading'])
+    ...mapState(['users', 'user', 'posts', 'loading'])
   },
   methods: {
     ...mapActions([
@@ -91,19 +91,20 @@ export default {
       this.getUser(user);
       this.manageCallsByRoute(id);
     },
-    manageCallsByRoute(id) {
+    manageCallsByRoute(idUsr) {
       const { name } = this.$route;
 
       const routeCall = {
-        Home: id => this.getPostsByUserId(id),
-        Posts: id => this.getPostsByUserId(id),
-        Fotos: id => this.getImagesByUserId(id)
+        Home: idUsr => this.getPostsByUserId(idUsr),
+        Posts: idUsr => this.getPostsByUserId(idUsr),
+        Fotos: idUsr => this.getImagesByUserId(idUsr)
       };
 
       this.comp = this.componentRender(name);
 
-      return routeCall[name](id);
-    }
+      return routeCall[name](idUsr);
+    },
+    checkIfNeedRequest() {}
   },
   created() {
     if (this.users.length === 0) {
