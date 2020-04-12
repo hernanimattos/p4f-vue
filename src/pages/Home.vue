@@ -1,6 +1,7 @@
 <template>
   <Layout class="home">
     <template slot="header">
+      <Loader :show="loading" />
       <Logo />
     </template>
     <template slot="left-side">
@@ -49,6 +50,7 @@ import Logo from '@/components/Logo';
 import UserCard from '@/components/UserCard';
 import PostsContainer from '@/containers/PostsContainer';
 import FotosContainer from '@/containers/FotosContainer';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'Home',
@@ -65,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['users', 'user'])
+    ...mapState(['users', 'user', 'loading'])
   },
   methods: {
     ...mapActions([
@@ -83,7 +85,6 @@ export default {
 
       return component[route];
     },
-
     getDataByUserId(user) {
       const { id } = user;
 
@@ -92,6 +93,7 @@ export default {
     },
     manageCallsByRoute(id) {
       const { name } = this.$route;
+
       const routeCall = {
         Home: id => this.getPostsByUserId(id),
         Posts: id => this.getPostsByUserId(id),
@@ -112,13 +114,13 @@ export default {
       });
     }
   },
-
   components: {
     Layout,
     Logo,
     UserCard,
     PostsContainer,
-    FotosContainer
+    FotosContainer,
+    Loader
   }
 };
 </script>
@@ -155,7 +157,7 @@ export default {
   display: block;
   padding: 1rem;
 }
-.router-link-exact-active {
+.navigation-content .router-link-exact-active {
   background-color: rebeccapurple;
 }
 

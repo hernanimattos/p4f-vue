@@ -1,33 +1,41 @@
 <template>
-  <div class="loader">
+  <div :class="{ show: show }" class="loader">
     <img src="../assets/load.gif" alt="" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'loader'
+  name: 'loader',
+  props: {
+    show: {
+      type: Boolean,
+      required: false
+    }
+  }
 };
 </script>
 
 <style>
 .loader {
+  display: none;
+}
+.loader.show {
+  display: block;
   position: fixed;
   z-index: 500;
-  background-color: white;
-  width: 70%;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px black;
-  padding: 16px;
-  left: 15%;
-  top: 30%;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  height: 100%;
+  left: 0;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 }
-@media (min-width: 600px) {
-  .loader {
-    width: 500px;
-    left: calc(50% - 250px);
-  }
+.loader img {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 100px);
 }
 </style>

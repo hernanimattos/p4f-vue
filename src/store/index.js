@@ -12,7 +12,8 @@ export default new Vuex.Store({
         users: [],
         user: {},
         posts: [],
-        imgs: []
+        imgs: [],
+        loading: false
       },
       mutations: {
         setUsers(state, payload) {
@@ -26,13 +27,21 @@ export default new Vuex.Store({
         },
         setImages(state, payload) {
           state.imgs = payload;
+        },
+        setLoading(state, payload) {
+          state.loading = payload;
         }
       },
       actions: {
         async getUsers({ commit }) {
+          commit('setLoading', true);
+
           return Http.get('/users').then(res => {
             const { data } = res || {};
+
             commit('setUsers', data);
+            commit('setLoading', false);
+
             return Promise.resolve(data);
           });
         },
@@ -41,14 +50,20 @@ export default new Vuex.Store({
           commit('setUser', user);
         },
         async getPostsByUserId({ commit }, userId) {
+          commit('setLoading', true);
+
           return Http.get(`/posts?userId=${userId}`).then(res => {
             const { data } = res;
+            commit('setLoading', false);
             commit('setPosts', data);
           });
         },
         async getImagesByUserId({ commit }, id) {
+          commit('setLoading', true);
+
           return Http.get(`/photos?albumId=${id}`).then(res => {
             const { data } = res;
+            commit('setLoading', false);
             commit('setImages', data);
           });
         }
