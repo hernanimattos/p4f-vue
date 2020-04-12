@@ -13,7 +13,7 @@
           :company="user.company.name"
           :email="user.email"
           @click="getDataByUserId(user)"
-          default
+          active
         />
       </aside>
     </template>

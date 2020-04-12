@@ -11,14 +11,14 @@ export default {
   name: 'user-card',
   data() {
     return {
-      isActive: this.default
+      isActive: this.active
     };
   },
   props: {
     title: String,
     email: String,
     company: String,
-    default: {
+    active: {
       type: Boolean,
       default: false
     }
