@@ -11,7 +11,8 @@ export default new Vuex.Store({
       state: {
         users: [],
         user: {},
-        posts: []
+        posts: [],
+        imgs: []
       },
       mutations: {
         setUsers(state, payload) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
         },
         setPosts(state, payload) {
           state.posts = payload;
+        },
+        setImages(state, payload) {
+          state.imgs = payload;
         }
       },
       actions: {
@@ -40,6 +44,12 @@ export default new Vuex.Store({
           return Http.get(`/posts?userId=${userId}`).then(res => {
             const { data } = res;
             commit('setPosts', data);
+          });
+        },
+        async getImagesByUserId({ commit }, id) {
+          return Http.get(`/photos?albumId=${id}`).then(res => {
+            const { data } = res;
+            commit('setImages', data);
           });
         }
       }

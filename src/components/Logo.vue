@@ -2,6 +2,7 @@
   <div>
     <router-link to="/">
       <img
+        class="logo"
         src="https://apostasesportivas24.com/images/apostasesportivas24/logo_p4f.jpg"
         alt="p4f"
       />
@@ -16,7 +17,7 @@ export default {
 </script>
 
 <style>
-img {
+.logo {
   width: 200px;
 }
 </style>

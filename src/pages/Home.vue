@@ -4,7 +4,7 @@
       <Logo />
     </template>
     <template slot="left-side">
-      <aside v-if="users">
+      <aside v-if="users" class="side-nav">
         <user-card
           v-for="user in users"
           :key="user.id"
@@ -17,7 +17,7 @@
       </aside>
     </template>
     <template slot="main-content">
-      <section class="navigation-container">
+      <section class="main-content__dinamic">
         <nav class="navigation-content">
           <ul>
             <li>
@@ -54,21 +54,35 @@ export default {
   name: 'Home',
   data() {
     return {
-      comp: PostsContainer
+      comp: ''
     };
   },
   watch: {
     $route(to) {
-      const { meta } = to || {};
-      const { component } = meta;
-      this.comp = component || PostsContainer;
+      const { name } = to || {};
+      const { id } = this.user;
+      this.manageCallsByRoute(id);
     }
   },
   computed: {
     ...mapState(['users', 'user'])
   },
   methods: {
-    ...mapActions(['getUsers', 'getUser', 'getPostsByUserId']),
+    ...mapActions([
+      'getUsers',
+      'getUser',
+      'getPostsByUserId',
+      'getImagesByUserId'
+    ]),
+    componentRender(route) {
+      const component = {
+        Home: PostsContainer,
+        Posts: PostsContainer,
+        Fotos: FotosContainer
+      };
+
+      return component[route];
+    },
 
     getDataByUserId(user) {
       const { id } = user;
@@ -79,8 +93,12 @@ export default {
     manageCallsByRoute(id) {
       const { name } = this.$route;
       const routeCall = {
-        Posts: id => this.getPostsByUserId(id)
+        Home: id => this.getPostsByUserId(id),
+        Posts: id => this.getPostsByUserId(id),
+        Fotos: id => this.getImagesByUserId(id)
       };
+
+      this.comp = this.componentRender(name);
 
       return routeCall[name](id);
     }
@@ -90,10 +108,7 @@ export default {
       this.getUsers().then(res => {
         const { id } = res[0];
         this.getUser(res[0]);
-        const { name } = this.$route;
-        if (name === 'Posts') {
-          this.getPostsByUserId(id);
-        }
+        this.manageCallsByRoute(id);
       });
     }
   },
@@ -110,9 +125,10 @@ export default {
 <style>
 .home {
   padding: 1rem;
+  min-width: 1px;
 }
 
-aside {
+.side-nav {
   display: flex;
   max-width: 100%;
   flex-direction: column;
@@ -120,9 +136,15 @@ aside {
   background-color: rgb(26, 117, 255);
 }
 
-.navigation-container {
+.main-content__dinamic {
   padding-left: 1rem;
+  min-width: 1px;
+  overflow: hidden;
 }
+
+/* .navigation-content {
+  overflow: hidden;
+} */
 
 .navigation-content ul {
   background-color: #f09500;
@@ -141,14 +163,14 @@ aside {
 }
 
 @media screen and (max-width: 768px) {
-  .navigation-container {
+  .main-content__dinamic {
     margin-top: 2rem;
     padding-left: 0;
   }
 }
 
 @media screen and (min-width: 768px) {
-  aside {
+  .side-nav {
     padding: 1rem;
   }
 }
