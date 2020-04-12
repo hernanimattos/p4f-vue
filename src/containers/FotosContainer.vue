@@ -23,7 +23,6 @@ export default {
       thumbContainer: '',
       fotoItem: '',
       thumbWidth: '',
-      thumbContinerThumb: '',
       move: ''
     };
   },
@@ -35,11 +34,11 @@ export default {
   },
   methods: {
     constrolWithFotoItem() {
-      this.thumbContainer = document.getElementsByClassName('fotos-container');
-      this.thumbContinerThumb = document.getElementsByClassName(
+      // this.thumbContainer = document.getElementsByClassName('fotos-container');
+      this.thumbContainer = document.getElementsByClassName(
         'fotos-container__thumb'
       );
-      this.thumbWidth = this.thumbContinerThumb[0].clientWidth / 4;
+      this.thumbWidth = this.thumbContainer[0].clientWidth / 4;
       setTimeout(() => {
         this.fotoItem = document.getElementsByClassName('foto-item');
 
@@ -59,10 +58,8 @@ export default {
         this.thumbIndex = 0;
       }
 
-      console.log(this.thumbIndex, 'depois');
-
       this.move = this.thumbWidth * this.thumbIndex;
-      this.thumbContinerThumb[0].style.marginLeft = `-${this.move}px`;
+      this.thumbContainer[0].style.marginLeft = `-${this.move}px`;
     },
     leftControl() {
       this.thumbIndex--;
@@ -73,7 +70,7 @@ export default {
         this.move = 0;
       }
 
-      this.thumbContinerThumb[0].style.marginLeft = `-${this.move}px`;
+      this.thumbContainer[0].style.marginLeft = `-${this.move}px`;
       this.controlActive();
     }
   },
