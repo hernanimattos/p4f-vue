@@ -10,9 +10,7 @@ describe('teste actions', () => {
     expect(ob.commit).toBeCalledWith('setImageInit', 'data');
   });
   it('getPostsByUserId be commited', done => {
-    Http.get = jest.fn(() =>
-      Promise.resolve({ data: { aquisestavocesafadinho: 'ok' } })
-    );
+    Http.get = jest.fn(() => Promise.resolve({ data: { aqui: 'ok' } }));
 
     const ob = {
       commit: jest.fn()
@@ -26,6 +24,24 @@ describe('teste actions', () => {
     promise.then(res => {
       expect(ob.commit).toBeCalledWith('setLoading', false);
       expect(ob.commit).toBeCalledWith('setPosts', res);
+    });
+    done();
+  });
+  it('getUsers be commited', done => {
+    Http.get = jest.fn(() => Promise.resolve({ data: { aqui: 'ok' } }));
+
+    const ob = {
+      commit: jest.fn()
+    };
+
+    const promise = actions.getUsers(ob);
+
+    expect(ob.commit).toBeCalledWith('setLoading', true);
+    expect(Http.get).toBeCalledWith('/users');
+
+    promise.then(res => {
+      expect(ob.commit).toBeCalledWith('setLoading', false);
+      expect(ob.commit).toBeCalledWith('setUsers', res);
     });
     done();
   });
