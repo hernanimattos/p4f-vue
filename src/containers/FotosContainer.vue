@@ -49,16 +49,14 @@ export default {
       this.getImageSelected({ url: value });
     },
     constrolWithFotoItem() {
-      setTimeout(() => {
-        this.thumbContainerSize = document.getElementsByClassName(
-          'fotos-container'
-        );
-        this.thumbContainer = document.getElementsByClassName(
-          'fotos-container__thumb'
-        );
-        this.thumbWidth = this.thumbContainerSize[0].clientWidth / 4;
-        this.fotoItem = document.getElementsByClassName('foto-item');
-      }, 100);
+      this.thumbContainerSize = document.getElementsByClassName(
+        'fotos-container'
+      );
+      this.thumbContainer = document.getElementsByClassName(
+        'fotos-container__thumb'
+      );
+      this.thumbWidth = this.thumbContainerSize[0].clientWidth / 4;
+      this.fotoItem = document.getElementsByClassName('foto-item');
     },
     controlActive() {
       const fotoItem = document.getElementsByClassName('foto-item');
@@ -99,7 +97,9 @@ export default {
     }
   },
   updated() {
-    this.constrolWithFotoItem();
+    this.$nextTick(() => {
+      this.constrolWithFotoItem();
+    });
   },
   components: {
     FotoThumb
